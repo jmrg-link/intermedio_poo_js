@@ -26,7 +26,7 @@
 #### Que es Javascript 
 *   JavaScript es un lenguaje de programación orientado a objetos, aunque basado en prototipos porque los objetos están (internamente) construidos con prototipos.📌
 
-#### Seccion 2 : Atributos y métodos estáticos en JavaScript
+### Seccion 2 : Atributos y métodos estáticos en JavaScript
 
 *   Para crear atributos estáticos los cuales podamos acceder sin crear un objeto o una instancia de este prototipo, solo hay que agregar al atributo la palabra **static**
 
@@ -108,4 +108,41 @@ Object.getOwnPropertyDescriptors(objetito)
          value: "jesus"
      }  
 }
+```
+
+### Seccion 3 : Métodos estáticos del prototipo Object
+
+**Object.key()** y/o **Object.getOwnPropertyName()** obtienes en un arreglo todas las claves del objeto en cuestión, sin importar si son métodos o atributos, ej:
+
+["name", "email", "age"]
+
+**Object.entries()** obtienes un array de array con todas las propiedades del objeto, tener cuidado si tienes un método dentro de el, pues this cambia al usar esta propiedad, ej:
+
+[ 0: ["name", "jesus"] 1:[...], ...]
+
+con Object.getOwnPropertyDescriptors() obtienes en un objeto las propiedades del objeto con otros cosas que nos permitirán poder hacer encapsulamiento, 
+
+codigo de ejemplo:
+```javascript
+
+const Jesus = {
+  name: "Jesus",
+  age: 37,
+  approvedCourses: ['Curso 1'],
+  addCourse(newCourse: string) {
+    console.log('This:', this);
+    console.log('This.approvedCourses:', this.approvedCourses);
+    this.approvedCourses.push(newCourse);
+  }
+};
+
+Object.defineProperty(Jesus, "prueba-NASA", {
+  value: "👽",
+  enumerable: true,
+  writable: true,
+  configurable: true
+});
+
+console.table(Object.getOwnPropertyDescriptors(Jesus));
+
 ```
